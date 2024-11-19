@@ -5,7 +5,7 @@ namespace Controle_Manutencao.Repository;
 public interface IModeloRep{
         Task cadastrarModelo();
         Task excluirModelo();
-        Task <List<Manutencao>> listarEquipamntos();
-
+        Task <List<Manutencao>> listarManutencoes();
+        Task <List<Equipamento>> listarEquipamentos();
 
 }
