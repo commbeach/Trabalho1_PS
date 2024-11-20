@@ -58,7 +58,7 @@ public class ModeloRep : IModeloRep
             return await _context.Equipamentos
             .Where(e => e.modelo.Id == modeloId)
             .ToListAsync();
-    }
+        }
         
         catch (Exception ex)
         {
@@ -68,20 +68,39 @@ public class ModeloRep : IModeloRep
     }
 
 
-public async Task<List<Manutencao>> listarManutencoes(int modeloId)
+    public async Task<List<Manutencao>> listarManutencoes(int modeloId)
     {
         try
         {
-              return await _context.Modelos
-            .Where(e => e.Id == modeloId)
-            .SelectMany(u => u.Manutencoes)
-            .ToListAsync();
-    }
-        
+            return await _context.Modelos
+                .Where(e => e.Id == modeloId)
+                .SelectMany(u => u.Manutencoes)
+                .ToListAsync();
+        }
         catch (Exception ex)
         {
 
             throw new Exception($"Erro ao listar Manutencoes : {ex.Message}");
         }
     }
+
+    public async Task<Modelo> ObterModeloPorId(int id)
+    {
+        try 
+        {
+            var modelo = await _context.Modelos
+                .Include(m => m.Manutencoes)
+                .FirstOrDefaultAsync(m => m.Id == id);
+        
+            if (modelo == null)
+                throw new Exception("Modelo não encontrado");
+        
+            return modelo;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar modelo: {ex.Message}");
+        }
+    }
+    
 }

@@ -101,4 +101,23 @@ public class ManutencaoRep : IManutencaoRep
             throw new Exception($"Erro ao remover item : {ex.Message}");
         }
     }
+    
+    public async Task<Manutencao> ObterManutencaoPorId(int id)
+    {
+        try 
+        {
+            var manutencao = await _context.Manutencoes
+                .Include(m => m.Itens)
+                .FirstOrDefaultAsync(m => m.Id == id);
+        
+            if (manutencao == null)
+                throw new Exception("Manutenção não encontrada");
+        
+            return manutencao;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar manutenção: {ex.Message}");
+        }
+    }
 }

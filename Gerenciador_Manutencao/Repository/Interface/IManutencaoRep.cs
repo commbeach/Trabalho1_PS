@@ -7,5 +7,7 @@ public interface IManutencaoRep{
         Task excluirManutencao(int id);
         Task adicionarItem(int manutencaoId,Item i);
         Task removerItem(int manutencaoId,int i);
+        
+        Task<Manutencao> ObterManutencaoPorId(int id);
 
 }

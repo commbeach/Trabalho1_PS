@@ -7,5 +7,7 @@ public interface IModeloRep{
         Task excluirModelo(int id);
         Task <List<Manutencao>> listarManutencoes(int id);
         Task <List<Equipamento>> listarEquipamentos(int id);
+        
+        Task<Modelo> ObterModeloPorId(int id);
 
 }

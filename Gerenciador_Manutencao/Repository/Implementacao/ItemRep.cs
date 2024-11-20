@@ -13,6 +13,25 @@ public class ItemRep : IItemRep
     {
         _context = context;
     }
+    
+    public async Task<Item> ObterItemPorId(int id)
+    {
+        try 
+        {
+            var item = await _context.Itens
+                .FirstOrDefaultAsync(i => i.Id == id);
+        
+            if (item == null)
+                throw new Exception("Item não encontrado");
+        
+            return item;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar item: {ex.Message}");
+        }
+    }
+
 
     public async Task cadastrarItem(Item item)
     {
@@ -52,4 +71,5 @@ public class ItemRep : IItemRep
             throw new Exception($"Erro ao excluir item: {ex.Message}");
         }
     }
+    
 }

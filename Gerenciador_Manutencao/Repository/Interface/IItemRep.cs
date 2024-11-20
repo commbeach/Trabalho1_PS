@@ -6,5 +6,6 @@ public interface IItemRep{
 
         Task cadastrarItem(Item item);
         Task excluirItem(int id);
+        Task<Item> ObterItemPorId(int id);
 
 }
