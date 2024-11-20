@@ -1,4 +1,4 @@
-namespace Controle_Manutencao.Model;
+namespace Gerenciador_Manutencao.Model;
 
 public class Modelo
 {

@@ -1,10 +1,10 @@
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 
 namespace Controle_Manutencao.Repository;
 
 public interface IItemRep{
 
-        Task cadastrarItem();
-        Task excluirItem();
+        Task cadastrarItem(Item item);
+        Task excluirItem(int id);
 
 }

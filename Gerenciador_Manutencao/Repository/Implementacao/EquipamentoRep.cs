@@ -14,6 +14,11 @@ public class EquipamentoRep : IEquipamentoRep
         _context = context;
     }
 
+    public async Task <List<Equipamento>> listarTodosEquipamentos(){
+        return await _context.Equipamentos
+            .ToListAsync();
+
+    }
     public async Task cadastrarEquipamento(Equipamento equipamento)
     {
         try
@@ -38,7 +43,7 @@ public class EquipamentoRep : IEquipamentoRep
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (equipamento == null)
-                throw new Exception("Equipamento n„o encontrado");
+                throw new Exception("Equipamento n√£o encontrado");
 
             _context.Equipamentos.Remove(equipamento);
             await _context.SaveChangesAsync();
@@ -57,7 +62,7 @@ public class EquipamentoRep : IEquipamentoRep
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (equipamento == null)
-                throw new Exception("Equipamento n„o encontrado");
+                throw new Exception("Equipamento n√£o encontrado");
 
             equipamento.HorimetroOuOdometro = horaOuKm;
             await _context.SaveChangesAsync();
@@ -65,6 +70,30 @@ public class EquipamentoRep : IEquipamentoRep
         catch (Exception ex)
         {
             throw new Exception($"Erro ao atualizar horimetro/odometro: {ex.Message}");
+        }
+    }
+
+     public async Task<List<Manutencao>> listarManutencoes(int id)
+    {
+        try
+        {
+            
+            var equipamento = await _context.Equipamentos
+
+                .Include(e => e.modelo)
+
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (equipamento == null)
+                throw new Exception("Equipamento nao encontrado");
+
+            return equipamento.modelo.Manutencoes.ToList();
+
+        }
+        catch (Exception ex)
+        {
+
+            throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
         }
     }
 }

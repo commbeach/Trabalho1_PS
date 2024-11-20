@@ -1,6 +1,6 @@
 using Controle_Manutencao.Repository;
 using Gerenciador_Manutencao.Data;
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciador_Manutencao.Repository.Implementacao;
@@ -26,7 +26,7 @@ public class ManutencaoRep : IManutencaoRep
         }
         catch (Exception ex)
         {
-            throw new Exception($"Erro ao cadastrar manutenção: {ex.Message}");
+            throw new Exception($"Erro ao cadastrar manutenÃ§Ã£o: {ex.Message}");
         }
     }
 
@@ -38,14 +38,14 @@ public class ManutencaoRep : IManutencaoRep
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (manutencao == null)
-                throw new Exception("Manutençao nao encontrada");
+                throw new Exception("ManutenÃ§ao nao encontrada");
 
             _context.Manutencoes.Remove(manutencao);
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
         {
-            throw new Exception($"Erro ao excluir manutençao: {ex.Message}");
+            throw new Exception($"Erro ao excluir manutenÃ§ao: {ex.Message}");
         }
     }
 
@@ -59,7 +59,7 @@ public class ManutencaoRep : IManutencaoRep
 
             if (manutencao == null)
 
-                throw new Exception("Manutençao nao foi encontrada");
+                throw new Exception("ManutenÃ§ao nao foi encontrada");
 
 
             if (item == null)
@@ -85,12 +85,12 @@ public class ManutencaoRep : IManutencaoRep
                 .FirstOrDefaultAsync(m => m.Id == manutencaoId);
 
             if (manutencao == null)
-                throw new Exception("Manutençao nao foi encontrada");
+                throw new Exception("ManutenÃ§ao nao foi encontrada");
 
             var item = manutencao.Itens.FirstOrDefault(i => i.Id == itemId);
 
             if (item == null)
-                throw new Exception("Item nao encontrado na manutençao");
+                throw new Exception("Item nao encontrado na manutenÃ§ao");
 
             manutencao.Itens.Remove(item);
 

@@ -1,6 +1,6 @@
 using Controle_Manutencao.Repository;
 using Gerenciador_Manutencao.Data;
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciador_Manutencao.Repository.Implementacao;
@@ -51,26 +51,37 @@ public class ModeloRep : IModeloRep
         }
     }
 
-    public async Task<List<Equipamento>> ListarEquipamentos(int modeloId)
+    public async Task<List<Equipamento>> listarEquipamentos(int modeloId)
     {
         try
         {
-            var modelo = await _context.Modelos
-
-                .Include(m => m.Equipamentos)
-
-                .FirstOrDefaultAsync(m => m.Id == modeloId);
-
-            if (modelo == null)
-                throw new Exception("Modelo nao encontrado");
-
-            return modelo.Equipamentos.ToList();
-
-        }
+            return await _context.Equipamentos
+            .Where(e => e.modelo.Id == modeloId)
+            .ToListAsync();
+    }
+        
         catch (Exception ex)
         {
 
             throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
+        }
+    }
+
+
+public async Task<List<Manutencao>> listarManutencoes(int modeloId)
+    {
+        try
+        {
+              return await _context.Modelos
+            .Where(e => e.Id == modeloId)
+            .SelectMany(u => u.Manutencoes)
+            .ToListAsync();
+    }
+        
+        catch (Exception ex)
+        {
+
+            throw new Exception($"Erro ao listar Manutencoes : {ex.Message}");
         }
     }
 }

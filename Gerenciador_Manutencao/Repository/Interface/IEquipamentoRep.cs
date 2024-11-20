@@ -1,10 +1,11 @@
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 
 namespace Controle_Manutencao.Repository;
 
 public interface IEquipamentoRep{
-        Task cadastrarEquipamento();
-        Task excluirEquipamento();
-        Task informarHorimentroOuOdometro(int horaOuKm);
-        Task listarManutencoes();
+        Task <List<Equipamento>> listarTodosEquipamentos();
+        Task cadastrarEquipamento(Equipamento equipamento);
+        Task excluirEquipamento(int id);
+        Task informarHorimentroOuOdometro(int id, int horaOuKm);
+        Task <List<Manutencao>> listarManutencoes(int id);
 }

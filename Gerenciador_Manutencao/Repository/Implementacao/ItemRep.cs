@@ -1,6 +1,6 @@
 using Controle_Manutencao.Repository;
 using Gerenciador_Manutencao.Data;
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciador_Manutencao.Repository.Implementacao;

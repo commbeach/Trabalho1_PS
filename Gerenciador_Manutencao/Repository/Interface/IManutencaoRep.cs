@@ -1,11 +1,11 @@
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 
 namespace Controle_Manutencao.Repository;
 
 public interface IManutencaoRep{
-        Task cadastrarManutencao();
-        Task excluirManutencao();
-        Task adicionarItem(Item i);
-        Task removerItem(Item i);
+        Task cadastrarManutencao(Manutencao manutencao);
+        Task excluirManutencao(int id);
+        Task adicionarItem(int manutencaoId,Item i);
+        Task removerItem(int manutencaoId,int i);
 
 }

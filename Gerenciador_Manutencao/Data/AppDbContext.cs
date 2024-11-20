@@ -1,4 +1,4 @@
-using Controle_Manutencao.Model;
+using Gerenciador_Manutencao.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gerenciador_Manutencao.Data;
