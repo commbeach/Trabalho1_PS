@@ -10,10 +10,12 @@ namespace Gerenciador_Manutencao.Controller;
 public class EquipamentoController : ControllerBase
 {
     private readonly IEquipamentoRep _equipamentoRep;
+    private readonly IModeloRep _modeloRep;
 
-    public EquipamentoController(IEquipamentoRep equipamentoRep)
+    public EquipamentoController(IEquipamentoRep equipamentoRep, IModeloRep modeloRep)
     {
         _equipamentoRep = equipamentoRep;
+        _modeloRep = modeloRep;
     }
     
     [HttpGet]
@@ -24,22 +26,25 @@ public class EquipamentoController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<ActionResult> CadastrarEquipamento(EquipamentoDTO equipamentoDTO)
+    public async Task<ActionResult> CadastrarEquipamento(EquipamentoDTO equipamentoDTO, int IdModelo)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
+        var m = await _modeloRep.ObterModeloPorId(IdModelo);
         
         var equipamento = new Equipamento
         {
             Tipo = equipamentoDTO.Tipo,
-            HorimetroOuOdometro = equipamentoDTO.HorimetroOuOdometro
+            HorimetroOuOdometro = equipamentoDTO.HorimetroOuOdometro,
+            IdModelo = IdModelo
         };
 
         await _equipamentoRep.cadastrarEquipamento(equipamento);
         return CreatedAtAction(nameof(GetEquipamentos), new { id = equipamento.Id }, equipamento);
         
     }
+
 
     
     [HttpDelete("{id}")]
