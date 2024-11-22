@@ -13,6 +13,4 @@ public class ItemDTO
     [Required(ErrorMessage = "A descrição é obrigatória")]
     public string Descricao { get; set; }
 
-    [Required(ErrorMessage = "A quantidade é obrigatória")]
-    public float Quantidade { get; set; }
 }
