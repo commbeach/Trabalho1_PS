@@ -19,14 +19,12 @@ public class ManutencaoController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> ObterManutencao(int id)
     {
-        
         var manutencao = await _manutencaoRep.ObterManutencaoPorId(id);
         return Ok(manutencao);
-        
     }
     
     [HttpPost]
-    public async Task<IActionResult> CadastrarManutencao( ManutencaoDTO manutencaoDto)
+    public async Task<IActionResult> CadastrarManutencao([FromBody] ManutencaoDTO manutencaoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -35,22 +33,20 @@ public class ManutencaoController : ControllerBase
         {
             Tipo = manutencaoDto.Tipo,
             Recorrencia = manutencaoDto.Recorrencia,
-            Status = manutencaoDto.Status
+            Status = manutencaoDto.Status,
+            // Inicializa a lista de itens como vazia
+            Itens = new List<Item>()
         };
-
         
         await _manutencaoRep.cadastrarManutencao(manutencao);
         return CreatedAtAction(nameof(ObterManutencao), new { id = manutencao.Id }, manutencao);
-        
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> ExcluirManutencao(int id)
     {
-        
         await _manutencaoRep.excluirManutencao(id);
         return NoContent();
-        
     }
 
     [HttpPost("{manutencaoId}/item")]
@@ -58,16 +54,12 @@ public class ManutencaoController : ControllerBase
     {
         await _manutencaoRep.adicionarItem(manutencaoId, item);
         return Ok();
-        
     }
 
     [HttpDelete("{manutencaoId}/item/{itemId}")]
     public async Task<IActionResult> RemoverItem(int manutencaoId, int itemId)
     {
-        
         await _manutencaoRep.removerItem(manutencaoId, itemId);
         return NoContent();
-            
     }
-    
 }
