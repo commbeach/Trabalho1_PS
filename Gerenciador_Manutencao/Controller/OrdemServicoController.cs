@@ -13,6 +13,7 @@ public class OrdemServicoController : ControllerBase
 
     public OrdemServicoController(IOrdemServicoRep ordemServicoRep)
     {
+
         _ordemServicoRep = ordemServicoRep;
     }
 
@@ -33,10 +34,12 @@ public class OrdemServicoController : ControllerBase
             };
 
             await _ordemServicoRep.abrirOrdemServico(ordemServico.dataAbertura);
+
             return Ok("Ordem de serviço aberta com sucesso");
         }
         catch (Exception ex)
         {
+
             return BadRequest($"Erro ao abrir ordem de serviço: {ex.Message}");
         }
     }
@@ -56,14 +59,14 @@ public class OrdemServicoController : ControllerBase
     }
 
     [HttpPost("item")]
-    public async Task<IActionResult> AdicionarItem([FromBody] Item item)
+    public async Task<IActionResult> AdicionarItem([FromBody] (Item Item, int Quantidade) itemQuantidade)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
         try
         {
-            await _ordemServicoRep.adicionarItem(item);
+            await _ordemServicoRep.adicionarItem(itemQuantidade.Item, itemQuantidade.Quantidade);
+
             return Ok("Item adicionado com sucesso");
         }
         catch (Exception ex)
@@ -81,6 +84,7 @@ public class OrdemServicoController : ControllerBase
         try
         {
             await _ordemServicoRep.removerItem(item);
+
             return Ok("Item removido com sucesso");
         }
         catch (Exception ex)
