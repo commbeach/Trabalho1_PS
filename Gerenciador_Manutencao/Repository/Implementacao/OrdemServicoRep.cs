@@ -22,7 +22,7 @@ public class OrdemServicoRep : IOrdemServicoRep
             {
                 dataAbertura = data,
                 status = "Aberta",
-                Itens = new List<Item>()
+                Itens = new List<(Item, int)>()
             };
 
             await _context.OrdemServicos.AddAsync(ordemServico);
@@ -56,7 +56,7 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task adicionarItem(Item i)
+    public async Task adicionarItem(Item item, int quantidade)
     {
         try
         {
@@ -69,10 +69,13 @@ public class OrdemServicoRep : IOrdemServicoRep
             if (ordemServico == null)
                 throw new Exception("Não foi encontrada nenhuma ordem de serviço aberta");
 
-            if (i == null)
-                throw new ArgumentNullException(nameof(i));
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
 
-            ordemServico.Itens.Add(i);
+            if (quantidade <= 0)
+                throw new ArgumentException("A quantidade deve ser maior que zero");
+
+            ordemServico.Itens.Add((item, quantidade));
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -81,7 +84,7 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task removerItem(Item i)
+    public async Task removerItem(Item item)
     {
         try
         {
@@ -94,13 +97,10 @@ public class OrdemServicoRep : IOrdemServicoRep
             if (ordemServico == null)
                 throw new Exception("Não foi encontrada nenhuma ordem de serviço aberta");
 
-            if (i == null)
-                throw new ArgumentNullException(nameof(i));
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
 
-            var itemParaRemover = ordemServico.Itens.FirstOrDefault(item => item.Id == i.Id);
-            if (itemParaRemover == null)
-                throw new Exception("Item não encontrado na ordem de serviço");
-
+            var itemParaRemover = ordemServico.Itens.FirstOrDefault(i => i.Item.Id == item.Id);
             ordemServico.Itens.Remove(itemParaRemover);
             await _context.SaveChangesAsync();
         }
@@ -110,7 +110,7 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task<List<Item>> listarItens()
+    public async Task<List<(Item Item, int Quantidade)>> listarItens()
     {
         try
         {
@@ -121,7 +121,7 @@ public class OrdemServicoRep : IOrdemServicoRep
                 .FirstOrDefaultAsync();
 
             if (ordemServico == null)
-                return new List<Item>();
+                return new List<(Item, int)>();
 
             return ordemServico.Itens;
         }
