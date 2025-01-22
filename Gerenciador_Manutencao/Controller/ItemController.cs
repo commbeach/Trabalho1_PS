@@ -36,7 +36,6 @@ public class ItemController : ControllerBase
             Tipo = itemDTO.Tipo,
             unidadeDeMedida = itemDTO.UnidadeDeMedida,
             descricao = itemDTO.Descricao,
-            quantidade = itemDTO.Quantidade
         };
 
         await _itemRep.cadastrarItem(item);
