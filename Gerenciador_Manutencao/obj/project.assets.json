@@ -627,24 +627,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cliente\\.nuget\\packages\\": {}
+    "C:\\Users\\20201bsi0150\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
+      "projectUniqueName": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
       "projectName": "Gerenciador_Manutencao",
-      "projectPath": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
-      "packagesPath": "C:\\Users\\Cliente\\.nuget\\packages\\",
-      "outputPath": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\obj\\",
+      "projectPath": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
+      "packagesPath": "C:\\Users\\20201bsi0150\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\obj\\",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "C:\\Users\\Cliente\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\20201bsi0150\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -692,7 +695,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
