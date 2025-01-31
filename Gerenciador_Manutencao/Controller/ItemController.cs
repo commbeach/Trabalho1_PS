@@ -1,51 +1,42 @@
-using Controle_Manutencao.Repository;
-using Gerenciador_Manutencao.Model;
+using Controle_Manutencao.Service;
 using Gerenciador_Manutencao.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Gerenciador_Manutencao.Controller;
-
-[Route("api/[controller]")]
-[ApiController]
-public class ItemController : ControllerBase
+namespace Gerenciador_Manutencao.Controller
 {
-    private readonly IItemRep _itemRep;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ItemController : ControllerBase
+    {
+        private readonly IItemService _itemService;
 
-    public ItemController(IItemRep itemRep)
-    {
-        _itemRep = itemRep;
-    }
-    
-    [HttpGet("{id}")]
-    public async Task<IActionResult> ObterItem(int id)
-    {
-        
-        var item = await _itemRep.ObterItemPorId(id);
-        return Ok(item);
-        
-    }
-    
-    [HttpPost]
-    public async Task<ActionResult> CadastrarItem(ItemDTO itemDTO)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        
-        var item = new Item
+        public ItemController(IItemService itemService)
         {
-            Tipo = itemDTO.Tipo,
-            unidadeDeMedida = itemDTO.UnidadeDeMedida,
-            descricao = itemDTO.Descricao,
-        };
+            _itemService = itemService;
+        }
 
-        await _itemRep.cadastrarItem(item);
-        return CreatedAtAction(nameof(ObterItem), new { id = item.Id }, item);
-    }
-    
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> ExcluirItem(int id)
-    {
-        await _itemRep.excluirItem(id);
-        return NoContent();
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterItem(int id)
+        {
+            var item = await _itemService.ObterItemPorId(id);
+            return Ok(item);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ItemResponseDTO>> CadastrarItem(ItemRequestDTO itemDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var item = await _itemService.CadastrarItem(itemDTO);
+            return CreatedAtAction(nameof(ObterItem), new { id = item.Id }, item);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ExcluirItem(int id)
+        {
+            await _itemService.ExcluirItem(id);
+            return NoContent();
+        }
     }
 }

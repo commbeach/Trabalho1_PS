@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj": {}
+    "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj": {}
   },
   "projects": {
-    "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj": {
+    "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
+        "projectUniqueName": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
         "projectName": "Gerenciador_Manutencao",
-        "projectPath": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
-        "packagesPath": "C:\\Users\\20201bsi0150\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\20201bsi0150\\Documents\\GitHub\\Trabalho1_PS\\Gerenciador_Manutencao\\obj\\",
+        "projectPath": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\Gerenciador_Manutencao.csproj",
+        "packagesPath": "C:\\Users\\Cliente\\.nuget\\packages\\",
+        "outputPath": "C:\\GIT\\Trabalho1_PS\\Gerenciador_Manutencao\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\20201bsi0150\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Cliente\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -48,7 +45,15 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.0.1, )"
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[14.2.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[7.2.0, )"
             }
           },
           "imports": [
@@ -70,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

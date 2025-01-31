@@ -56,7 +56,7 @@ public class ModeloRep : IModeloRep
         try
         {
             return await _context.Equipamentos
-            .Where(e => e.modelo.Id == modeloId)
+            .Where(e => e.Modelo.Id == modeloId)
             .ToListAsync();
         }
         

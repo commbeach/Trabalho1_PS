@@ -80,14 +80,14 @@ public class EquipamentoRep : IEquipamentoRep
             
             var equipamento = await _context.Equipamentos
 
-                .Include(e => e.modelo)
+                .Include(e => e.Modelo)
 
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (equipamento == null)
                 throw new Exception("Equipamento nao encontrado");
 
-            return equipamento.modelo.Manutencoes.ToList();
+            return equipamento.Modelo.Manutencoes.ToList();
 
         }
         catch (Exception ex)

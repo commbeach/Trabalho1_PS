@@ -2,6 +2,7 @@ using Controle_Manutencao.Repository;
 using Gerenciador_Manutencao.Model;
 using Gerenciador_Manutencao.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Controle_Manutencao.Service;
 
 namespace Gerenciador_Manutencao.Controller;
 
@@ -9,31 +10,21 @@ namespace Gerenciador_Manutencao.Controller;
 [Route("api/[controller]")]
 public class OrdemServicoController : ControllerBase
 {
-    private readonly IOrdemServicoRep _ordemServicoRep;
+    private readonly IOrdemServicoService _ordemServicoService;
 
-    public OrdemServicoController(IOrdemServicoRep ordemServicoRep)
-    {
-
-        _ordemServicoRep = ordemServicoRep;
-    }
-
+     public OrdemServicoController(IOrdemServicoService ordemServicoService)
+        {
+            _ordemServicoService = ordemServicoService;
+        }
     [HttpPost("abrir")]
-    public async Task<IActionResult> AbrirOrdemServico([FromBody] OrdemServicoDTO ordemServicoDto)
+    public async Task<IActionResult> AbrirOrdemServico([FromBody] OrdemServicoRequestDTO ordemServicoDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         try
         {
-            var ordemServico = new OrdemServico
-            {
-                idEquipamento = ordemServicoDto.idEquipamento,
-                tipo = ordemServicoDto.tipo,
-                dataAbertura = DateTime.Now,
-                status = "Aberta"
-            };
-
-            await _ordemServicoRep.abrirOrdemServico(ordemServico.dataAbertura);
+            await _ordemServicoService.AbrirOrdemServico(ordemServicoDto);
 
             return Ok("Ordem de serviço aberta com sucesso");
         }
@@ -49,7 +40,7 @@ public class OrdemServicoController : ControllerBase
     {
         try
         {
-            await _ordemServicoRep.fecharOrdemServico(DateTime.Now);
+            await _ordemServicoService. FecharOrdemServico();
             return Ok("Ordem de serviço fechada com sucesso");
         }
         catch (Exception ex)
@@ -59,13 +50,13 @@ public class OrdemServicoController : ControllerBase
     }
 
     [HttpPost("item")]
-    public async Task<IActionResult> AdicionarItem([FromBody] (Item Item, int Quantidade) itemQuantidade)
+    public async Task<IActionResult> AdicionarItem([FromBody] (Item item, int Quantidade) itemQuantidade)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         try
         {
-            await _ordemServicoRep.adicionarItem(itemQuantidade.Item, itemQuantidade.Quantidade);
+            await _ordemServicoService.AdicionarItem( itemQuantidade);
 
             return Ok("Item adicionado com sucesso");
         }
@@ -83,7 +74,7 @@ public class OrdemServicoController : ControllerBase
 
         try
         {
-            await _ordemServicoRep.removerItem(item);
+            await _ordemServicoService.RemoverItem(item);
 
             return Ok("Item removido com sucesso");
         }
@@ -98,7 +89,7 @@ public class OrdemServicoController : ControllerBase
     {
         try
         {
-            var itens = await _ordemServicoRep.listarItens();
+            var itens = await _ordemServicoService. ListarItens();
             return Ok(itens);
         }
         catch (Exception ex)
