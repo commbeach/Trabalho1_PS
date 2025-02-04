@@ -51,22 +51,7 @@ public class ModeloRep : IModeloRep
         }
     }
 
-    public async Task<List<Equipamento>> listarEquipamentos(int modeloId)
-    {
-        try
-        {
-            return await _context.Equipamentos
-            .Where(e => e.Modelo.Id == modeloId)
-            .ToListAsync();
-        }
-        
-        catch (Exception ex)
-        {
-
-            throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
-        }
-    }
-
+    
 
     public async Task<List<Manutencao>> listarManutencoes(int modeloId)
     {
@@ -102,5 +87,35 @@ public class ModeloRep : IModeloRep
             throw new Exception($"Erro ao buscar modelo: {ex.Message}");
         }
     }
+
+     public async Task adicionarManutenção(int idmodelo,int idmanutencao)
+    {
+        {
+        try
+        {
+            var modelo = await _context.Modelos
+                .Include(m => m.Manutencoes)
+                .FirstOrDefaultAsync(m => m.Id == idmodelo);
+
+            if (modelo == null)
+
+                throw new Exception("Modelo nao foi encontrada");
+
+            var manutencaorep = new ManutencaoRep(_context);
+            Manutencao manutencao = await manutencaorep.ObterManutencaoPorId(idmanutencao);
+            if (manutencao == null)
+
+                throw new ArgumentNullException(nameof(manutencao));
+
+            modelo.Manutencoes.Add(manutencao);
+
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao adicionar manutencao: {ex.Message}");
+        }
+    }
     
+}
 }

@@ -92,4 +92,22 @@ public class EquipamentoRep : IEquipamentoRep
             throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
         }
     }
+
+    public async Task<List<Equipamento>> listarEquipamentos(int modeloId)
+    {
+        try
+        {
+            return await _context.Equipamentos
+            .Where(e => e.IdModelo == modeloId)
+            .ToListAsync();
+        }
+        
+        catch (Exception ex)
+        {
+
+            throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
+        }
+    }
+
+
 }

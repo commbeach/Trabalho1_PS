@@ -8,7 +8,9 @@ namespace Controle_Manutencao.Service
         Task<ModeloResponseDTO> ObterModelo(int id);
         Task<ModeloResponseDTO> CadastrarModelo(ModeloRequestDTO modeloDto);
         Task ExcluirModelo(int id);
-        Task<List<Equipamento>> ListarEquipamentos(int modeloId);
+        //Task<List<Equipamento>> ListarEquipamentos(int modeloId);
+        Task adicionarManutenção(int idmodelo,int idmanutencao);
         Task<List<Manutencao>> ListarManutencoes(int modeloId);
+
     }
 }

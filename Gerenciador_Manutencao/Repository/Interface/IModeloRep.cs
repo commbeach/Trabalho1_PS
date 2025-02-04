@@ -6,8 +6,10 @@ public interface IModeloRep{
         Task cadastrarModelo(Modelo modelo);
         Task excluirModelo(int id);
         Task <List<Manutencao>> listarManutencoes(int id);
-        Task <List<Equipamento>> listarEquipamentos(int id);
+        //Task <List<Equipamento>> listarEquipamentos(int id);
         
         Task<Modelo> ObterModeloPorId(int id);
+
+         Task adicionarManutenção(int idmodelo,int idmanutencao);
 
 }

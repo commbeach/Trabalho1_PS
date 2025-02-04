@@ -47,14 +47,19 @@ namespace Controle_Manutencao.Service
             await _modeloRep.excluirModelo(id);
         }
 
-        public async Task<List<Equipamento>> ListarEquipamentos(int modeloId)
-        {
-            return await _modeloRep.listarEquipamentos(modeloId);
-        }
+        //  public async Task<List<Equipamento>> ListarEquipamentos(int modeloId)
+        //  {
+        //      return await _modeloRep.listarEquipamentos(modeloId);
+        //  }
 
         public async Task<List<Manutencao>> ListarManutencoes(int modeloId)
         {
             return await _modeloRep.listarManutencoes(modeloId);
+        }
+
+        public async Task adicionarManutenção(int idmodelo,int idmanutencao)
+        {
+            await _modeloRep.adicionarManutenção(idmodelo,idmanutencao);
         }
     }
 }

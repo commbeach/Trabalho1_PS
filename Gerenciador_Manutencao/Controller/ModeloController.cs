@@ -39,12 +39,12 @@ namespace Gerenciador_Manutencao.Controller
             return NoContent();
         }
 
-        [HttpGet("{id}/equipamentos")]
-        public async Task<IActionResult> ListarEquipamentos(int id)
-        {
-            var equipamentos = await _modeloService.ListarEquipamentos(id);
-            return Ok(equipamentos);
-        }
+        // [HttpGet("{id}/equipamentos")]
+        // public async Task<IActionResult> ListarEquipamentos(int id)
+        // {
+        //     var equipamentos = await _modeloService.ListarEquipamentos(id);
+        //     return Ok(equipamentos);
+        // }
 
         [HttpGet("{id}/manutencoes")]
         public async Task<IActionResult> ListarManutencoes(int id)
@@ -52,5 +52,17 @@ namespace Gerenciador_Manutencao.Controller
             var manutencoes = await _modeloService.ListarManutencoes(id);
             return Ok(manutencoes);
         }
+
+        [HttpPost("/manutencao")]
+        public async Task<IActionResult> AdcionarManutencao(int idmodelo,int idmanutencao)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            await _modeloService.adicionarManutenção(idmodelo,idmanutencao);
+            return Ok();
+        }
+
+        
     }
 }
