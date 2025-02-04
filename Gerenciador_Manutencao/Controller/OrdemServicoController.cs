@@ -50,13 +50,13 @@ public class OrdemServicoController : ControllerBase
     }
 
     [HttpPost("item")]
-    public async Task<IActionResult> AdicionarItem([FromBody] (Item item, int Quantidade) itemQuantidade)
+    public async Task<IActionResult> AdicionarItem([FromBody] Item item)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         try
         {
-            await _ordemServicoService.AdicionarItem( itemQuantidade);
+            await _ordemServicoService.AdicionarItem(item);
 
             return Ok("Item adicionado com sucesso");
         }

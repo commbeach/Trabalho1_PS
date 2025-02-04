@@ -22,7 +22,7 @@ public class OrdemServicoRep : IOrdemServicoRep
             {
                 dataAbertura = data,
                 status = "Aberta",
-                Itens = new List<(Item, int)>()
+                Itens = new List<Item>()
             };
 
             await _context.OrdemServicos.AddAsync(ordemServico);
@@ -56,7 +56,7 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task adicionarItem(Item item, int quantidade)
+    public async Task adicionarItem(Item item)
     {
         try
         {
@@ -72,10 +72,7 @@ public class OrdemServicoRep : IOrdemServicoRep
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            if (quantidade <= 0)
-                throw new ArgumentException("A quantidade deve ser maior que zero");
-
-            ordemServico.Itens.Add((item, quantidade));
+            ordemServico.Itens.Add(item);
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -100,7 +97,7 @@ public class OrdemServicoRep : IOrdemServicoRep
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            var itemParaRemover = ordemServico.Itens.FirstOrDefault(i => i.Item.Id == item.Id);
+            var itemParaRemover = ordemServico.Itens.FirstOrDefault(i => i.Id == item.Id);
             ordemServico.Itens.Remove(itemParaRemover);
             await _context.SaveChangesAsync();
         }
@@ -110,7 +107,7 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task<List<(Item Item, int Quantidade)>> listarItens()
+    public async Task<List<Item>> listarItens()
     {
         try
         {
@@ -121,7 +118,7 @@ public class OrdemServicoRep : IOrdemServicoRep
                 .FirstOrDefaultAsync();
 
             if (ordemServico == null)
-                return new List<(Item, int)>();
+                return new List<Item>();
 
             return ordemServico.Itens;
         }

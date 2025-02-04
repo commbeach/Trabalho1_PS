@@ -33,9 +33,9 @@ public class OrdemServicoService : IOrdemServicoService
             await _ordemServicoRep.fecharOrdemServico(DateTime.Now);       
     }
 
-    public async Task AdicionarItem((Item Item, int Quantidade) itemQuantidade)
+    public async Task AdicionarItem(Item item)
     {
-            await _ordemServicoRep.adicionarItem(itemQuantidade.Item, itemQuantidade.Quantidade);
+            await _ordemServicoRep.adicionarItem(item);
     }
 
     public async Task RemoverItem(Item item)
@@ -43,7 +43,7 @@ public class OrdemServicoService : IOrdemServicoService
             await _ordemServicoRep.removerItem(item); 
     }
 
-    public async Task<List<(Item Item, int Quantidade)>> ListarItens()
+    public async Task<List<Item>> ListarItens()
     {
             var itens = await _ordemServicoRep.listarItens();
             return itens;

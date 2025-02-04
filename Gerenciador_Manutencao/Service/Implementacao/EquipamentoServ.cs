@@ -21,7 +21,7 @@ namespace Controle_Manutencao.Service
                 Id = e.Id,
                 Tipo = e.Tipo,
                 HorimetroOuOdometro = e.HorimetroOuOdometro,
-                Modelo = e.Modelo
+                IdModelo = e.IdModelo
             }).ToList();
         }
 
@@ -31,7 +31,7 @@ namespace Controle_Manutencao.Service
             {
                 Tipo = equipamentoDTO.Tipo,
                 HorimetroOuOdometro = equipamentoDTO.HorimetroOuOdometro,
-                Modelo = equipamentoDTO.Modelo
+                IdModelo = idModelo
             };
 
             await _equipamentoRep.cadastrarEquipamento(equipamento);
@@ -41,7 +41,7 @@ namespace Controle_Manutencao.Service
                 Id = equipamento.Id,
                 Tipo = equipamento.Tipo,
                 HorimetroOuOdometro = equipamento.HorimetroOuOdometro,
-                Modelo = equipamento.Modelo
+                IdModelo = equipamento.IdModelo
             };
         }
 

@@ -8,9 +8,9 @@ namespace Controle_Manutencao.Service{
 
         Task AbrirOrdemServico(OrdemServicoRequestDTO ordemServicoDto);
          Task FecharOrdemServico();
-         Task AdicionarItem((Item Item, int Quantidade) itemQuantidade);
+         Task AdicionarItem(Item item);
          Task RemoverItem(Item item);
-         Task<List<(Item Item, int Quantidade)>> ListarItens();
+         Task<List<Item>> ListarItens();
 
     }
 }

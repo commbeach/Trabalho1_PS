@@ -5,9 +5,9 @@ namespace Controle_Manutencao.Repository;
 public interface IOrdemServicoRep{
         Task abrirOrdemServico(DateTime data);
         Task fecharOrdemServico(DateTime data);
-        Task adicionarItem(Item item, int quantidade);
+        Task adicionarItem(Item item);
         Task removerItem(Item item);
-        Task<List<(Item Item, int Quantidade)>> listarItens();
+        Task<List<Item>> listarItens();
 
 
 }

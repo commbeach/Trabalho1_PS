@@ -73,26 +73,22 @@ public class EquipamentoRep : IEquipamentoRep
         }
     }
 
-     public async Task<List<Manutencao>> listarManutencoes(int id)
+    public async Task<List<Manutencao>> listarManutencoes(int id)
     {
+        ModeloRep modeloRep = new ModeloRep(_context);
         try
         {
-            
             var equipamento = await _context.Equipamentos
-
-                .Include(e => e.Modelo)
-
+                .Include(e => e.IdModelo)
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (equipamento == null)
                 throw new Exception("Equipamento nao encontrado");
 
-            return equipamento.Modelo.Manutencoes.ToList();
-
+            return await modeloRep.listarManutencoes(equipamento.IdModelo);
         }
         catch (Exception ex)
         {
-
             throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
         }
     }
