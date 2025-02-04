@@ -8,7 +8,7 @@ namespace Controle_Manutencao.Service
         Task<ManutencaoResponseDTO> ObterManutencao(int id);
         Task<ManutencaoResponseDTO> CadastrarManutencao(ManutencaoRequestDTO manutencaoDto);
         Task ExcluirManutencao(int id);
-        Task AdicionarItem(int manutencaoId, Item item);
+        Task AdicionarItem(int manutencaoId, int item);
         Task RemoverItem(int manutencaoId, int itemId);
     }
 }

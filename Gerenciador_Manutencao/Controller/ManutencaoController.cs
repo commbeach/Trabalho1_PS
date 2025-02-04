@@ -40,8 +40,8 @@ namespace Gerenciador_Manutencao.Controller
             return NoContent();
         }
 
-        [HttpPost("{manutencaoId}/item")]
-        public async Task<IActionResult> AdicionarItem(int manutencaoId, [FromBody] Item item)
+        [HttpPost("/item")]
+        public async Task<IActionResult> AdicionarItem(int manutencaoId,int item)
         {
             await _manutencaoService.AdicionarItem(manutencaoId, item);
             return Ok();

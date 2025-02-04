@@ -49,7 +49,7 @@ public class ManutencaoRep : IManutencaoRep
         }
     }
 
-    public async Task adicionarItem(int manutencaoId, Item item)
+    public async Task adicionarItem(int manutencaoId, int itemId)
     {
         try
         {
@@ -61,7 +61,8 @@ public class ManutencaoRep : IManutencaoRep
 
                 throw new Exception("Manutençao nao foi encontrada");
 
-
+            var itemRep = new ItemRep(_context);
+            Item item = await itemRep.ObterItemPorId(itemId);
             if (item == null)
 
                 throw new ArgumentNullException(nameof(item));

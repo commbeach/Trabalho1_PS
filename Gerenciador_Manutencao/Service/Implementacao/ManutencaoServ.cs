@@ -51,7 +51,7 @@ namespace Controle_Manutencao.Service
             await _manutencaoRep.excluirManutencao(id);
         }
 
-        public async Task AdicionarItem(int manutencaoId, Item item)
+        public async Task AdicionarItem(int manutencaoId, int item)
         {
             await _manutencaoRep.adicionarItem(manutencaoId, item);
         }
