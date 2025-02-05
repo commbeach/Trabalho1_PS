@@ -7,5 +7,6 @@ namespace Controle_Manutencao.Service
         Task<ItemResponseDTO> ObterItemPorId(int id);
         Task<ItemResponseDTO> CadastrarItem(ItemRequestDTO itemDTO);
         Task ExcluirItem(int id);
+        Task<List<ItemResponseDTO>> ListarItens();
     }
 }

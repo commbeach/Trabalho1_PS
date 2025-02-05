@@ -71,5 +71,11 @@ public class ItemRep : IItemRep
             throw new Exception($"Erro ao excluir item: {ex.Message}");
         }
     }
+
+     public async Task <List<Item>> ListarTodosItem(){
+        return await _context.Itens
+            .ToListAsync();
+
+    }
     
 }

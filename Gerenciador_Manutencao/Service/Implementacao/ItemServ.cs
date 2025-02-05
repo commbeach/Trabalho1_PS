@@ -26,6 +26,20 @@ namespace Controle_Manutencao.Service
             };
         }
 
+        public async Task<List<ItemResponseDTO>> ListarItens()
+        {
+             var item = await _itemRep.ListarTodosItem();
+            return item.Select(i => new ItemResponseDTO
+            {
+               Id = i.Id,
+                Tipo = i.Tipo,
+                UnidadeDeMedida = i.unidadeDeMedida,
+                Descricao = i.descricao,
+                Quantidade = i.quantidade
+            }).ToList();
+        }
+
+
         public async Task<ItemResponseDTO> CadastrarItem(ItemRequestDTO itemDTO)
         {
             var item = new Item

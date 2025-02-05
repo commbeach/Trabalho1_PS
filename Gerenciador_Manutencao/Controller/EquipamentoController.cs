@@ -41,7 +41,7 @@ namespace Gerenciador_Manutencao.Controller
             return NoContent();
         }
 
-        [HttpPut("{id}/horimetro-ou-odometro")]
+        [HttpPost("{id}/horimetro-ou-odometro")]
         public async Task<ActionResult> AtualizarHorimetroOuOdometro(int id, [FromBody] int horaOuKm)
         {
             await _equipamentoService.AtualizarHorimetroOuOdometro(id, horaOuKm);

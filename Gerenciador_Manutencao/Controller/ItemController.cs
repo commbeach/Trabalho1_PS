@@ -22,6 +22,14 @@ namespace Gerenciador_Manutencao.Controller
             return Ok(item);
         }
 
+        
+        [HttpGet]
+        public async Task<IActionResult> GetItens()
+        {
+            var item = await _itemService.ListarItens();
+            return Ok(item);
+        }
+
         [HttpPost]
         public async Task<ActionResult<ItemResponseDTO>> CadastrarItem(ItemRequestDTO itemDTO)
         {
