@@ -53,13 +53,13 @@ namespace Gerenciador_Manutencao.Controller
             return Ok(manutencoes);
         }
 
-        [HttpPost("{id}/manutencao")]
-        public async Task<IActionResult> AdcionarManutencao(int idmodelo,int id)
+        [HttpPost("{id}/{manutencao}")]
+        public async Task<IActionResult> AdcionarManutencao(int id,int manutencao)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _modeloService.adicionarManutenção(idmodelo,id);
+            await _modeloService.adicionarManutenção(id, manutencao);
             return Ok();
         }
 

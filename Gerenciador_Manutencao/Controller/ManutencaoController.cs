@@ -48,14 +48,15 @@ namespace Gerenciador_Manutencao.Controller
             return NoContent();
         }
 
-        [HttpPost("{id}/item")]
-        public async Task<IActionResult> AdicionarItem(int manutencaoId,int id)
+        [HttpPost("{id}/{item}")]
+       
+        public async Task<IActionResult> AdicionarItem(int id,int item)
         {
-            await _manutencaoService.AdicionarItem(manutencaoId, id);
+            await _manutencaoService.AdicionarItem(id, item);
             return Ok();
         }
 
-        [HttpDelete("{manutencaoId}/item/{itemId}")]
+        [HttpDelete("{manutencaoId}/{itemId}")]
         public async Task<IActionResult> RemoverItem(int manutencaoId, int itemId)
         {
             await _manutencaoService.RemoverItem(manutencaoId, itemId);
