@@ -10,5 +10,7 @@ namespace Controle_Manutencao.Service
         Task ExcluirManutencao(int id);
         Task AdicionarItem(int manutencaoId, int item);
         Task RemoverItem(int manutencaoId, int itemId);
-    }
+        Task<List<ManutencaoResponseDTO>> ListarManutencao();
+
+            }
 }

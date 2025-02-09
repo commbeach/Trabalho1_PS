@@ -26,6 +26,19 @@ namespace Controle_Manutencao.Service
             };
         }
 
+         public async Task<List<ManutencaoResponseDTO>> ListarManutencao()
+        {
+            var manutencao = await _manutencaoRep.ListarManutencao();
+            return manutencao.Select(m => new ManutencaoResponseDTO
+            {
+               Id = m.Id,
+                Tipo = m.Tipo,
+                Recorrencia = m.Recorrencia,
+                Status = m.Status,
+                Itens = m.Itens
+            }).ToList();
+        }
+
         public async Task<ManutencaoResponseDTO> CadastrarManutencao(ManutencaoRequestDTO manutencaoDto)
         {
             var manutencao = new Manutencao

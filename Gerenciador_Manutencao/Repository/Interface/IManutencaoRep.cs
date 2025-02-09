@@ -9,5 +9,6 @@ public interface IManutencaoRep{
         Task removerItem(int manutencaoId,int i);
         
         Task<Manutencao> ObterManutencaoPorId(int id);
+        Task<List<Manutencao>> ListarManutencao();
 
 }

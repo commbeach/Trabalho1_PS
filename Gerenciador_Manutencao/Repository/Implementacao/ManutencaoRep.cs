@@ -121,4 +121,18 @@ public class ManutencaoRep : IManutencaoRep
             throw new Exception($"Erro ao buscar manutenção: {ex.Message}");
         }
     }
+
+      public async Task<List<Manutencao>> ListarManutencao()
+    {
+        try 
+        {
+        return await _context.Manutencoes
+         .ToListAsync();
+        
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar manutenção: {ex.Message}");
+        }
+    }
 }
