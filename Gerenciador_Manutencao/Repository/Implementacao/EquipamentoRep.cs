@@ -107,7 +107,29 @@ public class EquipamentoRep : IEquipamentoRep
 
             throw new Exception($"Erro ao listar equipamentos : {ex.Message}");
         }
+
+
+        
     }
+
+    public async Task<Equipamento> ObterEquipamentoPorId(int id)
+    {
+        try 
+        {
+            var equipamento = await _context.Equipamentos
+                .FirstOrDefaultAsync(m => m.Id == id);
+        
+            if (equipamento == null)
+                throw new Exception("Equipamento não encontrado");
+        
+            return equipamento;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar equipamento: {ex.Message}");
+        }
+    }
+
 
 
 }

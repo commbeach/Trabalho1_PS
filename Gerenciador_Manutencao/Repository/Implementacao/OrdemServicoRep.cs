@@ -14,16 +14,10 @@ public class OrdemServicoRep : IOrdemServicoRep
         _context = context;
     }
 
-    public async Task abrirOrdemServico(DateTime data)
+    public async Task abrirOrdemServico(OrdemServico ordemServico)
     {
         try
         {
-            var ordemServico = new OrdemServico
-            {
-                dataAbertura = data,
-                status = "Aberta",
-                Itens = new List<Item>()
-            };
 
             await _context.OrdemServicos.AddAsync(ordemServico);
             await _context.SaveChangesAsync();
@@ -56,75 +50,39 @@ public class OrdemServicoRep : IOrdemServicoRep
         }
     }
 
-    public async Task adicionarItem(Item item)
+
+    public async Task<List<OrdemServico>> ListarOrdemServico()
     {
-        try
+        try 
         {
-            var ordemServico = await _context.OrdemServicos
-                .Include(o => o.Itens)
-                .Where(o => o.status == "Aberta")
-                .OrderByDescending(o => o.dataAbertura)
-                .FirstOrDefaultAsync();
-
-            if (ordemServico == null)
-                throw new Exception("Não foi encontrada nenhuma ordem de serviço aberta");
-
-            if (item == null)
-                throw new ArgumentNullException(nameof(item));
-
-            ordemServico.Itens.Add(item);
-            await _context.SaveChangesAsync();
+        return await _context.OrdemServicos
+         .ToListAsync();
+        
         }
         catch (Exception ex)
         {
-            throw new Exception($"Erro ao adicionar item: {ex.Message}");
+            throw new Exception($"Erro ao buscar manutenção: {ex.Message}");
         }
     }
 
-    public async Task removerItem(Item item)
+     
+    public async Task<OrdemServico> ObterOrdemServicoPorId(int id)
     {
-        try
+        try 
         {
-            var ordemServico = await _context.OrdemServicos
-                .Include(o => o.Itens)
-                .Where(o => o.status == "Aberta")
-                .OrderByDescending(o => o.dataAbertura)
-                .FirstOrDefaultAsync();
-
-            if (ordemServico == null)
-                throw new Exception("Não foi encontrada nenhuma ordem de serviço aberta");
-
-            if (item == null)
-                throw new ArgumentNullException(nameof(item));
-
-            var itemParaRemover = ordemServico.Itens.FirstOrDefault(i => i.Id == item.Id);
-            ordemServico.Itens.Remove(itemParaRemover);
-            await _context.SaveChangesAsync();
+            var ordemservico = await _context.OrdemServicos
+                .FirstOrDefaultAsync(m => m.Id == id);
+        
+            if (ordemservico == null)
+                throw new Exception("Ordem Servico não encontrada");
+        
+            return ordemservico;
         }
         catch (Exception ex)
         {
-            throw new Exception($"Erro ao remover item: {ex.Message}");
+            throw new Exception($"Erro ao buscar Ordem de Servico: {ex.Message}");
         }
     }
 
-    public async Task<List<Item>> listarItens()
-    {
-        try
-        {
-            var ordemServico = await _context.OrdemServicos
-                .Include(o => o.Itens)
-                .Where(o => o.status == "Aberta")
-                .OrderByDescending(o => o.dataAbertura)
-                .FirstOrDefaultAsync();
 
-            if (ordemServico == null)
-                return new List<Item>();
-
-            return ordemServico.Itens;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao listar itens: {ex.Message}");
-        }
-    }
 }

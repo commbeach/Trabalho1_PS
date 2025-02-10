@@ -116,6 +116,21 @@ public class ModeloRep : IModeloRep
             throw new Exception($"Erro ao adicionar manutencao: {ex.Message}");
         }
     }
+    }
+
     
+    public async Task<List<Modelo>> ListarModelo()
+    {
+        try 
+        {
+        return await _context.Modelos
+         .ToListAsync();
+        
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao buscar Modelo: {ex.Message}");
+        }
+    }
 }
-}
+
