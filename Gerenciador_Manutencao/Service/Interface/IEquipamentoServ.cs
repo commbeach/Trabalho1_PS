@@ -10,5 +10,6 @@ namespace Controle_Manutencao.Service
         Task ExcluirEquipamento(int id);
         Task AtualizarHorimetroOuOdometro(int id, int horaOuKm);
         Task<List<Manutencao>> ListarManutencoes(int id);
+        Task<EquipamentoResponseDTO> ObterEquipamento(int id);
     }
 }

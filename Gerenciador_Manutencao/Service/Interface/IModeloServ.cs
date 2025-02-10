@@ -11,6 +11,8 @@ namespace Controle_Manutencao.Service
         //Task<List<Equipamento>> ListarEquipamentos(int modeloId);
         Task adicionarManutenção(int idmodelo,int idmanutencao);
         Task<List<Manutencao>> ListarManutencoes(int modeloId);
+        Task<List<Modelo>> ListarModelo();
+
 
     }
 }
