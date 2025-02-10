@@ -22,10 +22,11 @@ public class OrdemServicoService : IOrdemServicoService
             {
                 idEquipamento = ordemServicoDto.idEquipamento,
                 dataAbertura = DateTime.Now,
-                status = "Aberta"
+                status = "Aberta",
+                idManutencao = ordemServicoDto.idManutencao
             };
 
-            await _ordemServicoRep.abrirOrdemServico(ordemServico.dataAbertura);
+            await _ordemServicoRep.abrirOrdemServico(ordemServico);
     }
 
     public async Task FecharOrdemServico()
@@ -33,20 +34,33 @@ public class OrdemServicoService : IOrdemServicoService
             await _ordemServicoRep.fecharOrdemServico(DateTime.Now);       
     }
 
-    public async Task AdicionarItem(Item item)
-    {
-            await _ordemServicoRep.adicionarItem(item);
-    }
 
-    public async Task RemoverItem(Item item)
-    {
-            await _ordemServicoRep.removerItem(item); 
-    }
 
-    public async Task<List<Item>> ListarItens()
-    {
-            var itens = await _ordemServicoRep.listarItens();
-            return itens;
-      
-    }
+        public async Task<List<OrdemServicoResponseDTO>> ListarOrdemServico()
+{
+        var ordemservico = await _ordemServicoRep.ListarOrdemServico();
+        return ordemservico.Select(m => new OrdemServicoResponseDTO
+        {
+        Id = m.Id,
+        status= m.status,
+        idEquipamento= m.idEquipamento,
+        idManutencao = m.idManutencao,
+        dataAbertura = m.dataAbertura,
+        dataFinalizacao = m.dataFinalizacao
+
+        }).ToList();
+}
+        public async Task<OrdemServicoResponseDTO> ObterOrdemServ(int id){
+             var m =   await _ordemServicoRep.ObterOrdemServicoPorId(id);
+             return new OrdemServicoResponseDTO{
+                Id = m.Id,
+                status= m.status,
+                idEquipamento= m.idEquipamento,
+                idManutencao = m.idManutencao,
+                dataAbertura = m.dataAbertura,
+                dataFinalizacao = m.dataFinalizacao
+
+        };
+
+        }
 }

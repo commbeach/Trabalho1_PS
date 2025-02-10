@@ -59,5 +59,16 @@ namespace Controle_Manutencao.Service
         {
             return await _equipamentoRep.listarManutencoes(id);
         }
+
+        public async Task<EquipamentoResponseDTO> ObterEquipamento(int id)
+        {
+            var equipamento = await _equipamentoRep.ObterEquipamentoPorId(id);
+            return new EquipamentoResponseDTO
+            {
+                Id = equipamento.Id,
+                Tipo = equipamento.Tipo,
+                IdModelo = equipamento.IdModelo
+            };
+        }
     }
 }

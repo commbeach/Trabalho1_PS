@@ -61,5 +61,12 @@ namespace Controle_Manutencao.Service
         {
             await _modeloRep.adicionarManutenção(idmodelo,idmanutencao);
         }
-    }
+    
+
+        public async Task<List<Modelo>> ListarModelo()
+        {
+            return await _modeloRep.ListarModelo();
+        }
+
+}
 }
