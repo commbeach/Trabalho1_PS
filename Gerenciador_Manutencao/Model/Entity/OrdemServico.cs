@@ -8,5 +8,5 @@ public class OrdemServico
     public DateTime dataAbertura { get; set; }
     public DateTime dataFinalizacao { get; set; }
     public int idManutencao { get; set; }
-    public List<Item> Itens { get; set; } = new List<Item>();
+   
 }
