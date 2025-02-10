@@ -32,13 +32,14 @@ builder.Services.AddScoped<IEquipamentoRep, EquipamentoRep>();
 builder.Services.AddScoped<IItemRep, ItemRep>();
 builder.Services.AddScoped<IManutencaoRep, ManutencaoRep>();
 builder.Services.AddScoped<IModeloRep, ModeloRep>();
-//builder.Services.AddScoped<IOrdemServicoRep, OrdemServicoRep>();
+builder.Services.AddScoped<IOrdemServicoRep, OrdemServicoRep>();
 
 // Registro do serviço EquipamentoService
 builder.Services.AddScoped<IEquipamentoService, EquipamentoService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IManutencaoService, ManutencaoService>();
 builder.Services.AddScoped<IModeloService, ModeloService>();
+builder.Services.AddScoped<IOrdemServicoService, OrdemServicoService>();
 
 var app = builder.Build();
 
