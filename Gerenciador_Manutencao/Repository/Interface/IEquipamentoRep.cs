@@ -8,4 +8,5 @@ public interface IEquipamentoRep{
         Task excluirEquipamento(int id);
         Task informarHorimentroOuOdometro(int id, int horaOuKm);
         Task <List<Manutencao>> listarManutencoes(int id);
+        Task<Equipamento> ObterEquipamentoPorId(int id);
 }

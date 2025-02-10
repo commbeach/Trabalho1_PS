@@ -3,11 +3,9 @@ using Gerenciador_Manutencao.Model;
 namespace Controle_Manutencao.Repository;
 
 public interface IOrdemServicoRep{
-        Task abrirOrdemServico(DateTime data);
+        Task abrirOrdemServico(OrdemServico ordemServico);
         Task fecharOrdemServico(DateTime data);
-        Task adicionarItem(Item item);
-        Task removerItem(Item item);
-        Task<List<Item>> listarItens();
-
+        Task<List<OrdemServico>> ListarOrdemServico();
+        Task<OrdemServico> ObterOrdemServicoPorId(int id);
 
 }
