@@ -23,7 +23,7 @@ namespace Gerenciador_Manutencao.Controller
             return Ok(manutencao);
         }
 
-          [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> ListarManutencao()
         {
             var manutencao = await _manutencaoService.ListarManutencao();

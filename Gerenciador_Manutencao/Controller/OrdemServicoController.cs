@@ -49,52 +49,21 @@ public class OrdemServicoController : ControllerBase
         }
     }
 
-    [HttpPost("item")]
-    public async Task<IActionResult> AdicionarItem([FromBody] Item item)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-        try
-        {
-            await _ordemServicoService.AdicionarItem(item);
+    
 
-            return Ok("Item adicionado com sucesso");
-        }
-        catch (Exception ex)
+
+    [HttpGet]
+    public async Task<IActionResult> ListarOrdemServico()
         {
-            return BadRequest($"Erro ao adicionar item: {ex.Message}");
-        }
+            var ordemservico= await _ordemServicoService.ListarOrdemServico();
+            return Ok(ordemservico);
+        }    
+
+   
+    [HttpGet("{id}")]
+    public async Task<IActionResult> ObterporId(int id)
+        {
+            var ordemservico= await _ordemServicoService.ObterOrdemServ(id);
+            return Ok(ordemservico);
+        }    
     }
-
-    [HttpDelete("item")]
-    public async Task<IActionResult> RemoverItem([FromBody] Item item)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
-        try
-        {
-            await _ordemServicoService.RemoverItem(item);
-
-            return Ok("Item removido com sucesso");
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Erro ao remover item: {ex.Message}");
-        }
-    }
-
-    [HttpGet("itens")]
-    public async Task<IActionResult> ListarItens()
-    {
-        try
-        {
-            var itens = await _ordemServicoService. ListarItens();
-            return Ok(itens);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Erro ao listar itens: {ex.Message}");
-        }
-    }
-}

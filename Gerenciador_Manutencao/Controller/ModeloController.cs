@@ -63,6 +63,15 @@ namespace Gerenciador_Manutencao.Controller
             return Ok();
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> ListarModelo()
+        {
+            var modelo= await _modeloService.ListarModelo();
+            return Ok(modelo);
+        }    
+
     }
+    
+
+
 }

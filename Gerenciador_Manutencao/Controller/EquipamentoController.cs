@@ -41,7 +41,7 @@ namespace Gerenciador_Manutencao.Controller
             return NoContent();
         }
 
-        [HttpPost("{id}/horimetro-ou-odometro")]
+        [HttpPut("{id}/horimetro-ou-odometro")]
         public async Task<ActionResult> AtualizarHorimetroOuOdometro(int id, [FromBody] int horaOuKm)
         {
             await _equipamentoService.AtualizarHorimetroOuOdometro(id, horaOuKm);
@@ -54,5 +54,13 @@ namespace Gerenciador_Manutencao.Controller
             var manutencoes = await _equipamentoService.ListarManutencoes(id);
             return Ok(manutencoes);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObterEquipamento(int id)
+        {
+            var equipamento = await _equipamentoService.ObterEquipamento(id);
+            return Ok(equipamento);
+        }
     }
+    
 }
