@@ -25,13 +25,13 @@ namespace Controle_Manutencao.Service
             }).ToList();
         }
 
-        public async Task<EquipamentoResponseDTO> CadastrarEquipamento(EquipamentoRequestDTO equipamentoDTO, int idModelo)
+        public async Task<EquipamentoResponseDTO> CadastrarEquipamento(EquipamentoRequestDTO equipamentoDTO)
         {
             var equipamento = new Equipamento
             {
                 Tipo = equipamentoDTO.Tipo,
                 HorimetroOuOdometro = equipamentoDTO.HorimetroOuOdometro,
-                IdModelo = idModelo
+                IdModelo = equipamentoDTO.IdModelo
             };
 
             await _equipamentoRep.cadastrarEquipamento(equipamento);

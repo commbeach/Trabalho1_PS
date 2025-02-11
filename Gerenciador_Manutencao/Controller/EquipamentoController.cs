@@ -25,12 +25,12 @@ namespace Gerenciador_Manutencao.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<EquipamentoResponseDTO>> CadastrarEquipamento(EquipamentoRequestDTO equipamentoDTO, int idModelo)
+        public async Task<ActionResult<EquipamentoResponseDTO>> CadastrarEquipamento(EquipamentoRequestDTO equipamentoDTO)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var equipamento = await _equipamentoService.CadastrarEquipamento(equipamentoDTO, idModelo);
+            var equipamento = await _equipamentoService.CadastrarEquipamento(equipamentoDTO);
             return CreatedAtAction(nameof(GetEquipamentos), new { id = equipamento.Id }, equipamento);
         }
 

@@ -7,4 +7,6 @@ public class EquipamentoRequestDTO
     public int IdModelo { get; set; }
     public int HorimetroOuOdometro { get; set; }
 
+
+
 }
