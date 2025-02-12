@@ -20,10 +20,9 @@ builder.Services.AddCors(options =>
         });
 });
 
-
+//Conexão com o banco
 builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseInMemoryDatabase(databaseName: "TestDb"),
-    ServiceLifetime.Scoped
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
 
